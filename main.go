@@ -34,12 +34,17 @@ func gatherInfo(userName string) {
 }
 
 func main() {
-	prometheus.MustRegister(userPoints)
-	prometheus.MustRegister(teamPoints)
-	prometheus.MustRegister(userWus)
-	prometheus.MustRegister(userRank)
-	prometheus.MustRegister(active50)
-	prometheus.MustRegister(active7)
+	var promVars = []prometheus.Collector{
+		userPoints,
+		teamPoints,
+		userWus,
+		userRank,
+		active50,
+		active7,
+	}
+	for _, promVar := range promVars {
+		prometheus.MustRegister(promVar)
+	}
 
 	config := readUsers("config.yaml")
 

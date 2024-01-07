@@ -1,7 +1,9 @@
 # FoldingAtHome Prometheus Exporter
 
 Simple exporter to get infromation from Folding at Home API for specified users
-
+## Binaries
+Compiled binary can be found in latest successful build in https://github.com/t1bur1an/fah-exporter/actions
+just open workflow run and at the bottom you will found binaries.
 ## Config file
 Config file is called `config.yaml` and should be in the same folder with executable file.
 

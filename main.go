@@ -47,7 +47,7 @@ func main() {
 		prometheus.MustRegister(promVar)
 	}
 
-	config := readUsers("config.yaml")
+	config := readConfig("config.yaml")
 	if config.ListenPort > 20000 {
 		log.Fatal("Listen port is bigger than 20000")
 		os.Exit(2)

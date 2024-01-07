@@ -6,7 +6,7 @@ import (
 	"os"
 )
 
-func readUsers(filename string) YamlConfig {
+func readConfig(filename string) YamlConfig {
 	yamlFile, err := os.ReadFile(filename)
 
 	if err != nil {

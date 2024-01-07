@@ -6,7 +6,6 @@ import (
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"log"
 	"net/http"
-	"os"
 	"strconv"
 	"time"
 )
@@ -50,7 +49,6 @@ func main() {
 	config := readConfig("config.yaml")
 	if config.ListenPort > 20000 {
 		log.Fatal("Listen port is bigger than 20000")
-		os.Exit(2)
 	}
 
 	go func(users []string) {

@@ -11,7 +11,6 @@ func readConfig(filename string) YamlConfig {
 
 	if err != nil {
 		log.Fatal(err)
-		os.Exit(2)
 	}
 
 	var data YamlConfig
@@ -20,7 +19,6 @@ func readConfig(filename string) YamlConfig {
 
 	if err != nil {
 		log.Fatal(err)
-		os.Exit(2)
 	}
 
 	return data

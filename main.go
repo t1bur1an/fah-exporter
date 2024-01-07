@@ -29,6 +29,8 @@ func gatherInfo(userName string) {
 	userPoints.WithLabelValues(respJson.Name).Set(float64(respJson.Score))
 	userWus.WithLabelValues(respJson.Name).Set(float64(respJson.Wus))
 	userRank.WithLabelValues(respJson.Name).Set(float64(respJson.Rank))
+	active50.WithLabelValues(respJson.Name).Set(float64(respJson.Active50))
+	active7.WithLabelValues(respJson.Name).Set(float64(respJson.Active7))
 }
 
 func main() {
@@ -36,6 +38,8 @@ func main() {
 	prometheus.MustRegister(teamPoints)
 	prometheus.MustRegister(userWus)
 	prometheus.MustRegister(userRank)
+	prometheus.MustRegister(active50)
+	prometheus.MustRegister(active7)
 
 	config := readUsers("config.yaml")
 

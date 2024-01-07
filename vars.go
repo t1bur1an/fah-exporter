@@ -49,4 +49,26 @@ var (
 			"teamid",
 		},
 	)
+	active50 = prometheus.NewGaugeVec(
+		prometheus.GaugeOpts{
+			Namespace: "foldingathome",
+			Subsystem: "team",
+			Name:      "active50",
+			Help:      "Active user user clients in last 50d from FoldingAtHome api",
+		},
+		[]string{
+			"user",
+		},
+	)
+	active7 = prometheus.NewGaugeVec(
+		prometheus.GaugeOpts{
+			Namespace: "foldingathome",
+			Subsystem: "team",
+			Name:      "active7",
+			Help:      "Active user user clients in last 7d from FoldingAtHome api",
+		},
+		[]string{
+			"user",
+		},
+	)
 )

@@ -11,14 +11,16 @@ func readConfig(filename string) YamlConfig {
 
 	if err != nil {
 		log.Fatal(err)
+		os.Exit(2)
 	}
 
 	var data YamlConfig
 
-	err2 := yaml.Unmarshal(yamlFile, &data)
+	err = yaml.Unmarshal(yamlFile, &data)
 
-	if err2 != nil {
-		log.Fatal(err2)
+	if err != nil {
+		log.Fatal(err)
+		os.Exit(2)
 	}
 
 	return data

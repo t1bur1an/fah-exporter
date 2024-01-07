@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
+	"io"
 	"log"
 	"net/http"
 	"strconv"
@@ -17,7 +18,12 @@ func gatherInfo(userName string) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer resp.Body.Close()
+	defer func(Body io.ReadCloser) {
+		err := Body.Close()
+		if err != nil {
+			log.Println("Problem with closing response body: ", err)
+		}
+	}(resp.Body)
 	decoder := json.NewDecoder(resp.Body)
 	err = decoder.Decode(&respJson)
 	if err != nil {

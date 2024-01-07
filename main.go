@@ -6,6 +6,7 @@ import (
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"log"
 	"net/http"
+	"os"
 	"strconv"
 	"time"
 )
@@ -26,11 +27,11 @@ func gatherInfo(userName string) {
 	for _, team := range respJson.Teams {
 		teamPoints.WithLabelValues(respJson.Name, team.Name, strconv.Itoa(team.Team)).Set(float64(team.Score))
 	}
-	userPoints.WithLabelValues(respJson.Name).Set(float64(respJson.Score))
 	userWus.WithLabelValues(respJson.Name).Set(float64(respJson.Wus))
 	userRank.WithLabelValues(respJson.Name).Set(float64(respJson.Rank))
-	active50.WithLabelValues(respJson.Name).Set(float64(respJson.Active50))
 	active7.WithLabelValues(respJson.Name).Set(float64(respJson.Active7))
+	userPoints.WithLabelValues(respJson.Name).Set(float64(respJson.Score))
+	active50.WithLabelValues(respJson.Name).Set(float64(respJson.Active50))
 }
 
 func main() {
@@ -47,6 +48,10 @@ func main() {
 	}
 
 	config := readUsers("config.yaml")
+	if config.ListenPort > 20000 {
+		log.Fatal("Listen port is bigger than 20000")
+		os.Exit(2)
+	}
 
 	go func(users []string) {
 		for true {

@@ -2,13 +2,15 @@ package main
 
 import (
 	"encoding/json"
-	"github.com/prometheus/client_golang/prometheus"
-	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"io"
 	"log"
 	"net/http"
+	"os"
 	"strconv"
 	"time"
+
+	"github.com/prometheus/client_golang/prometheus"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
 func gatherInfo(userName string) {
@@ -55,6 +57,7 @@ func main() {
 	config := readConfig("config.yaml")
 	if config.ListenPort > 20000 {
 		log.Fatal("Listen port is bigger than 20000")
+    os.Exit(2)
 	}
 
 	go func(users []string) {
